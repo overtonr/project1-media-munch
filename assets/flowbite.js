@@ -62,6 +62,7 @@ function movieResults(resultObj) {
     resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img, linkButtonEl);
 
     resultContentEl.append(resultCard);
+
 }
 
 function searchOMDB(movie) {
@@ -120,6 +121,7 @@ function bookResults(resultObj) {
   resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img);
 
   resultContentEl.append(resultCard);
+
 }
 
 
