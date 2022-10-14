@@ -14,8 +14,6 @@ function SearchInputSubmit(event) {
     }
     console.log(searchInputVal)
 
-    //   var queryString = 'https://www.omdbapi.com/?apikey=58823a0&t=' + searchInputVal;
-    //   location.assign(queryString);
     searchGoogleBooks(searchInputVal);
     searchOMDB(searchInputVal);
 }
@@ -26,7 +24,6 @@ function movieResults(resultObj) {
     console.log(resultObj);
 
     var resultCard = document.createElement('div');
-    resultCard.classList.add('card', 'bg-light', 'text-dark', 'mb-3', 'p-3');
 
     var resultBody = document.createElement('div');
     resultBody.classList.add('card-body');
@@ -43,8 +40,8 @@ function movieResults(resultObj) {
     var bodyContentEl2 = document.createElement('p');
     bodyContentEl2.innerHTML =
         '<strong>Genre:</strong> ' + resultObj.Genre;
-        console.log(resultObj.Genre);
-    
+    console.log(resultObj.Genre);
+
     var bodyContentEl3 = document.createElement('p');
     bodyContentEl3.innerHTML =
         '<strong>Director:</strong> ' + resultObj.Director;
@@ -55,14 +52,11 @@ function movieResults(resultObj) {
     var searchInputVal = document.querySelector('#searchInput').value;
     var linkButtonEl = document.createElement('a');
     linkButtonEl.textContent = 'Read More';
-    linkButtonEl.setAttribute('href', "https://www.imdb.com/find?q="+ searchInputVal +"&ref_=nv_sr_sm");
-    
-    linkButtonEl.classList.add('btn', 'btn-dark');
+    linkButtonEl.setAttribute('href', "https://www.imdb.com/find?q=" + searchInputVal + "&ref_=nv_sr_sm");
 
     resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img, linkButtonEl);
 
     resultContentEl.append(resultCard);
-
 }
 
 function searchOMDB(movie) {
@@ -80,63 +74,77 @@ function searchOMDB(movie) {
 
 };
 
-function bookResults(resultObj) {
-  console.log(resultObj);
+function bookResults(resultObj,i) {
+    console.log(resultObj,i);
 
-  var resultCard = document.createElement('div');
-  resultCard.classList.add('card', 'bg-light', 'text-dark', 'mb-3', 'p-3');
+    var resultCard = document.createElement('div');
 
-  var resultBody = document.createElement('div');
-  resultBody.classList.add('card-body');
-  resultCard.append(resultBody);
+    var resultBody = document.createElement('div');
+    resultBody.classList.add('card-body');
+    resultCard.append(resultBody);
 
-  var titleEl = document.createElement('h3');
-  titleEl.textContent = resultObj.items[0].volumeInfo.title;
-  console.log(resultObj[0]);
+    var titleEl = document.createElement('h3');
+    titleEl.textContent = resultObj.items[i].volumeInfo.title;
+    console.log(resultObj);
 
-  var bodyContentEl1 = document.createElement('p');
-  bodyContentEl1.innerHTML =
-      '<strong>Author(s):</strong> ' + resultObj.items[0].volumeInfo.authors;
+    var bodyContentEl1 = document.createElement('p');
+    bodyContentEl1.innerHTML =
+        '<strong>Author(s):</strong> ' + resultObj.items[i].volumeInfo.authors;
 
-  var bodyContentEl2 = document.createElement('p');
-  bodyContentEl2.innerHTML =
-      '<strong>Genre:</strong> ' + resultObj.items[0].volumeInfo.categories;
-      console.log(resultObj.Genre);
-  
-  var bodyContentEl3 = document.createElement('p');
-  bodyContentEl3.innerHTML =
-      '<strong>Publisher:</strong> ' + resultObj.items[0].volumeInfo.publisher;
+    var bodyContentEl2 = document.createElement('p');
+    bodyContentEl2.innerHTML =
+        '<strong>Genre:</strong> ' + resultObj.items[i].volumeInfo.categories;
+    console.log(resultObj.Genre);
 
-  var img = document.createElement('img');
-  img.src = resultObj.items[0].volumeInfo.imageLinks.thumbnail;
+    var bodyContentEl3 = document.createElement('p');
+    bodyContentEl3.innerHTML =
+        '<strong>Publisher:</strong> ' + resultObj.items[i].volumeInfo.publisher;
 
-  // var searchInputVal = document.querySelector('#searchInput').value;
-  // var linkButtonEl = document.createElement('a');
-  // linkButtonEl.textContent = 'Read More';
-  // linkButtonEl.setAttribute('href', "https://www.imdb.com/find?q="+ searchInputVal +"&ref_=nv_sr_sm");
-  
-  // linkButtonEl.classList.add('btn', 'btn-dark');
+    var img = document.createElement('img');
+    img.src = resultObj.items[i].volumeInfo.imageLinks.thumbnail;
 
-  // resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img, linkButtonEl);
-  resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img);
+    var searchInputVal = document.querySelector('#searchInput').value;
+    var linkButtonEl = document.createElement('a');
+    linkButtonEl.textContent = 'Read More';
+    console.log(linkButtonEl.textContent);
+    linkButtonEl.setAttribute('href', "https://www.google.com/search?tbm=bks&hl=en&q=" + searchInputVal);
 
-  resultContentEl.append(resultCard);
+    resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img, linkButtonEl);
+
+    // resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img);
+
+    resultContentEl.append(resultCard);
 
 }
 
 
 function searchGoogleBooks(book) {
-  var bookAPI = "https://www.googleapis.com/books/v1/volumes?q=" + book;
+    var bookAPI = "https://www.googleapis.com/books/v1/volumes?q=" + book;
 
-  fetch(bookAPI)
-      .then(function (response) {
-          return response.json()
-      })
-      .then(function (data) {
-          console.log(data)
+    fetch(bookAPI)
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (data) {
+            console.log(data)
 
-          bookResults(data);
-      });
+            // bookResults(data);
+
+            if (!data.items.length) {
+                console.log('No results found!');
+                resultContentEl.innerHTML = '<h3>No results found, search again!</h3>';
+            } else {
+                resultContentEl.textContent = '';
+                console.log(data.items.length);
+                for (var i = 0; i < data.items.length; i++) {
+                    bookResults(data,i);
+                }
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+
+        });
 
 };
 
