@@ -1,6 +1,7 @@
 var searchFormEl = document.querySelector('#search-form');
 var resultTextEl = document.querySelector('#result-text');
 var resultContentEl = document.querySelector('#result-content');
+var resultContent2El = document.querySelector('#result-content2');
 var searchInputVal = document.querySelector('#searchInput').value;
 
 function SearchInputSubmit(event) {
@@ -26,12 +27,11 @@ function movieResults(resultObj) {
     var resultCard = document.createElement('div');
 
     var resultBody = document.createElement('div');
-    resultBody.classList.add('card-body');
     resultCard.append(resultBody);
 
     var titleEl = document.createElement('h3');
     titleEl.textContent = resultObj.Title;
-    console.log(resultObj[0]);
+    console.log(resultObj);
 
     var bodyContentEl1 = document.createElement('p');
     bodyContentEl1.innerHTML =
@@ -69,18 +69,28 @@ function searchOMDB(movie) {
         .then(function (data) {
             console.log(data)
 
-            movieResults(data);
-        });
+            // movieResults(data);
 
+            if (!data) {
+                console.log('No results found!');
+                resultContentEl.innerHTML = '<h3>No results found, search again!</h3>';
+            } else {
+                resultContentEl.textContent = '';
+                movieResults(data);
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+
+        });
 };
 
-function bookResults(resultObj,i) {
-    console.log(resultObj,i);
+function bookResults(resultObj, i) {
+    console.log(resultObj, i);
 
     var resultCard = document.createElement('div');
 
     var resultBody = document.createElement('div');
-    resultBody.classList.add('card-body');
     resultCard.append(resultBody);
 
     var titleEl = document.createElement('h3');
@@ -113,7 +123,7 @@ function bookResults(resultObj,i) {
 
     // resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img);
 
-    resultContentEl.append(resultCard);
+    resultContent2El.append(resultCard);
 
 }
 
@@ -132,12 +142,12 @@ function searchGoogleBooks(book) {
 
             if (!data.items.length) {
                 console.log('No results found!');
-                resultContentEl.innerHTML = '<h3>No results found, search again!</h3>';
+                resultContent2El.innerHTML = '<h3>No results found, search again!</h3>';
             } else {
-                resultContentEl.textContent = '';
+                resultContent2El.textContent = '';
                 console.log(data.items.length);
                 for (var i = 0; i < data.items.length; i++) {
-                    bookResults(data,i);
+                    bookResults(data, i);
                 }
             }
         })
