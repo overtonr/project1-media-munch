@@ -110,6 +110,10 @@ function bookResults(resultObj, i) {
     bodyContentEl3.innerHTML =
         '<strong>Publisher:</strong> ' + resultObj.items[i].volumeInfo.publisher;
 
+    var bodyContentEl4 = document.createElement('button')
+    bodyContentEl4.innerHTML = '☆';
+    bodyContentEl4.classList.add ('favoriteBtn');
+
     var img = document.createElement('img');
     img.src = resultObj.items[i].volumeInfo.imageLinks.thumbnail;
 
@@ -119,7 +123,7 @@ function bookResults(resultObj, i) {
     console.log(linkButtonEl.textContent);
     linkButtonEl.setAttribute('href', "https://www.google.com/search?tbm=bks&hl=en&q=" + searchInputVal);
 
-    resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img, linkButtonEl);
+    resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, bodyContentEl4, img, linkButtonEl);
 
     // resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img);
 
