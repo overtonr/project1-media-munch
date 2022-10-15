@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/style.css" /> -->
     <link href="./assets/dist/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
     <title>Media Munch</title>
@@ -75,7 +76,7 @@
                     <li>
                         <a href="#"
                             class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                            aria-current="page">Recent searches</a>
+                            aria-current="page" id="searchHistory">Recent searches</a>
                     </li>
                     <li>
                         <a href="#"
@@ -204,7 +205,8 @@
                     <li class="py-3 sm:py-4">
                         <div class="flex items-center space-x-4">
                             <div class="flex-shrink-0">
-                                <h2>Showing results for <span id="result-text"></span></h2>
+                                <h2>Showing results for</h2>
+                                <br>
                                 <!-- This will give us an option to put the search results into a card -->
                                 <!-- <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt=""> -->
                                 <div id="result-content"></div>
@@ -239,7 +241,8 @@
                     <li class="py-3 sm:py-4">
                         <div class="flex items-center space-x-4">
                             <div class="flex-shrink-0">
-                                <h2>Showing results for <span id="result-text"></span></h2>
+                                <h2>Showing results for</h2>
+                                <br>
                                 <!-- This will give us an option to put the search results into a card -->
                                 <!-- <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt=""> -->
                                 <div id="result-content2"></div>
@@ -367,10 +370,8 @@
 
     </main>
 
-
-
-
     <!-- <script type="text/javascript" src="./assets/script.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://unpkg.com/flowbite@1.4.4/dist/flowbite.js"></script>
     <script src="./assets/flowbite.js"></script>
 </body>
