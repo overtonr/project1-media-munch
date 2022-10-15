@@ -45,6 +45,10 @@ function movieResults(resultObj) {
     var bodyContentEl3 = document.createElement('p');
     bodyContentEl3.innerHTML =
         '<strong>Director:</strong> ' + resultObj.Director;
+    
+    var bodyContentEl4 = document.createElement('button')
+    bodyContentEl4.innerHTML = '☆';
+    bodyContentEl4.classList.add('favoriteBtn');
 
     var img = document.createElement('img');
     img.src = resultObj.Poster;
@@ -54,7 +58,7 @@ function movieResults(resultObj) {
     linkButtonEl.textContent = 'Read More';
     linkButtonEl.setAttribute('href', "https://www.imdb.com/find?q=" + searchInputVal + "&ref_=nv_sr_sm");
 
-    resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img, linkButtonEl);
+    resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, bodyContentEl4, img, linkButtonEl);
 
     resultContentEl.append(resultCard);
 }
@@ -112,7 +116,7 @@ function bookResults(resultObj, i) {
 
     var bodyContentEl4 = document.createElement('button')
     bodyContentEl4.innerHTML = '☆';
-    bodyContentEl4.classList.add ('favoriteBtn');
+    bodyContentEl4.classList.add('favoriteBtn');
 
     var img = document.createElement('img');
     img.src = resultObj.items[i].volumeInfo.imageLinks.thumbnail;
@@ -123,11 +127,13 @@ function bookResults(resultObj, i) {
     console.log(linkButtonEl.textContent);
     linkButtonEl.setAttribute('href', "https://www.google.com/search?tbm=bks&hl=en&q=" + searchInputVal);
 
+    var bodyContentEl5 = document.createElement('br')
+
     resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, bodyContentEl4, img, linkButtonEl);
 
     // resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img);
 
-    resultContent2El.append(resultCard);
+    resultContent2El.append(resultCard, bodyContentEl5);
 
 }
 
@@ -162,6 +168,32 @@ function searchGoogleBooks(book) {
 
 };
 
+var searchHistoryList = [];
+
+$("#searchBtn").on("click", function (event) {
+    event.preventDefault();
+
+    searchInputVal = $("#searchInput").val().trim();
+    searchGoogleBooks(searchInputVal);
+    searchOMDB(searchInputVal);
+    if (!searchHistoryList.includes(searchInputVal)) {
+        searchHistoryList.push(searchInputVal);
+        var searchedList = $(`
+            <li class="list-group-item">${searchInputVal}</li>
+            `);
+        $("#searchHistory").append(searchedList);
+    };
+
+    localStorage.setItem("city", JSON.stringify(searchHistoryList));
+    console.log(searchHistoryList);
+});
+
+
+$(document).on("click", ".list-group-item", function () {
+    var listMovieBooks = $(this).text();
+    searchGoogleBooks(listMovieBooks);
+    searchOMDB(listMovieBooks);
+});
 
 
 
