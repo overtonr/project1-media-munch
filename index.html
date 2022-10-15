@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css" /> -->
+    <link rel="stylesheet" href="./assets/style.css" />
     <link href="./assets/dist/output.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
@@ -30,14 +30,14 @@
 
 
     <nav
-        class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+        class="bg-white px-10 sm:px-12 py-2.5 dark:bg-gray-900 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
-            <a href="https://flowbite.com/" class="flex items-center">
+            <!-- <a href="https://flowbite.com/" class="flex items-center"> -->
 
-                <!-- Image url goes here -->
-                <img src="https://files.slack.com/files-pri/T03SVAX0QSD-F046M86VAE7/screen_shot_2022-10-14_at_12.20.08_pm.png"
-                    class="mr-3 h-6 sm:h-9" alt="Media munch logo">
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Media Munch</span>
+            <!-- Image url goes here -->
+            <img src="media-munch.png"
+                class="mr-3 h-10 sm:h-5" alt="Media munch logo">
+            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Media Munch</span>
             </a>
             <div class="flex md:order-2">
 
@@ -54,9 +54,6 @@
                     </svg>
                 </button>
 
-                <!-- <button type="button"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get
-                    started</button> -->
                 <button data-collapse-toggle="navbar-sticky" type="button"
                     class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     aria-controls="navbar-sticky" aria-expanded="false">
@@ -127,13 +124,7 @@
                 aria-controls="navbar-search" aria-expanded="false">
                 <!-- 
                 Add hamburger -->
-                <span class="sr-only">Open menu</span>
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                        clip-rule="evenodd"></path>
-                </svg>
+                
             </button>
         </div>
         <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-search">
@@ -188,15 +179,17 @@
         </div>
         <!-- <div>search result</div> -->
 
-    <div id="card-center"></div>
+    <section class="search-container">
 
-        <div
-            class="p-4 w-full max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-            <div class="flex justify-between items-center mb-4">
+        <div id="search-card">
+
+            <div
+                class="p-4 w-full max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <!-- <div class="flex justify-between items-center mb-4"> -->
                 <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Search Results: Movies</h5>
-                <!-- <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-                    View all
-                </a> -->
+                <!-- <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"> -->
+
+                </a>
             </div>
 
             <div class="flow-root">
@@ -224,14 +217,16 @@
             </div>
         </div>
 
-        <div id="card-center"></div>
 
-        <div
-            class="p-4 w-full max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-            <div class="flex justify-between items-center mb-4">
+
+        <div id="search-card">
+
+            <div
+                class="p-4 w-full max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <!-- <div class="flex justify-between items-center mb-4"> -->
                 <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Search Results: Books</h5>
-                <!-- <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-                    View all</a> -->
+                <!-- <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">  -->
+
             </div>
 
             <div class="flow-root">
@@ -259,11 +254,51 @@
             </div>
         </div>
 
-        
 
-    </div>
+
+
+
+
+
+        <div id="search-card">
+
+            <div
+                class="p-4 w-full max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <!-- <div class="flex justify-between items-center mb-4"> -->
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Favorites</h5>
+            </div>
+
+            <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    <li class="py-3 sm:py-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <h2>Showing results for <span id="result-text"></span></h2>
+                                <!-- This will give us an option to put the search results into a card -->
+                                <!-- <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="">  -->
+                                <div id="result-content2"></div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+
+                                    <!-- </p>
+                                <p class="text-sm text-gray-500 truncate dark:text-gray-400"> -->
+
+                                </p>
+                            </div>
+                            <div
+                                class="inline-flex items-center flex-row text-base font-semibold text-gray-900 dark:text-white">
+
+                            </div>
+                        </div>
+            </div>
+        </div>
+
+    </section>
+
+        </div>
         </li>
-     <!-- <li class="py-3 sm:py-4">
+        <!-- <li class="py-3 sm:py-4">
                 <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
                         <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="">
@@ -281,7 +316,7 @@
                     </div>
                 </div>
             </li> -->
-            <!-- <--  <li class="py-3 sm:py-4">
+        <!-- <--  <li class="py-3 sm:py-4">
                 <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
                         <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-2.jpg" alt="">
@@ -334,7 +369,7 @@
                         
                     </div>
                 </div>
-            </li> --> -->
+            </li> -->
         </ul>
         </div>
         </div>
@@ -345,7 +380,7 @@
 
 
         <footer
-            class="fixed bottom-0 left-0 z-20 p-4 w-full bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+            class="  z-20 p-4 w-full bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <a href="https://flowbite.com/"
                     class="hover:underline">Media Munch™</a>. All Rights Reserved.
             </span>

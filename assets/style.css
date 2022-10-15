@@ -4,6 +4,11 @@
 
 }
 
+img{
+    height: 100%;
+    width: 75px;
+}
+
 footer{
     position: fixed;
     left: 0;
@@ -19,7 +24,7 @@ footer{
     justify-content: center;
 }
 
-#flow-root{
+.search-container{
     background-color: hsl(0, 0%, 100%);
     border-radius: 5px;
     border-width: 1px;
@@ -27,7 +32,24 @@ footer{
     color: hsl(206, 17%, 28%);
     font-size: 18px;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 1600px;
+    max-height: fit-content;
     padding: 30px 40px;
+    background-color: rgb(171, 186, 186);
+   display: flex;
+   justify-content: space-between;
+   flex-grow: 7;
+   flex-wrap: wrap;
+    
 }
+
+@media screen and (max-width: 768px) {
+    header {
+      flex-direction: column;
+    }
+  
+    main {
+      max-width: 1200px;
+    }
+  }
 
