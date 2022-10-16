@@ -60,12 +60,20 @@ footer{
     
 }
 
+feature/debugged
 @media screen and (max-width: 480px) {
+
+@media screen and (max-width: 486px) {
+ main
     header {
       flex-direction: column;
     }
   
+ feature/debugged
     body{
+
+    body {
+ main
       max-width: 1200px;
     }
   }

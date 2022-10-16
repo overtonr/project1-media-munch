@@ -4,6 +4,7 @@ var resultContentEl = document.querySelector('#result-content');
 var resultContent2El = document.querySelector('#result-content2');
 var searchInputVal = document.querySelector('#searchInput').value;
 
+//Save the search input value
 function SearchInputSubmit(event) {
     event.preventDefault();
 
@@ -19,6 +20,7 @@ function SearchInputSubmit(event) {
     searchOMDB(searchInputVal);
 }
 
+//Get search results
 searchFormEl.addEventListener('submit', SearchInputSubmit);
 
 function movieResults(resultObj) {
@@ -45,6 +47,15 @@ function movieResults(resultObj) {
     var bodyContentEl3 = document.createElement('p');
     bodyContentEl3.innerHTML =
         '<strong>Director:</strong> ' + resultObj.Director;
+    
+    var bodyContentEl4 = document.createElement('button')
+    bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ☆';
+    bodyContentEl4.classList.add('favoriteBtn');
+
+    bodyContentEl4.addEventListener ("click", showFav)
+    function showFav(){
+        bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ★';
+    }
 
     var img = document.createElement('img');
     img.src = resultObj.Poster;
@@ -54,7 +65,7 @@ function movieResults(resultObj) {
     linkButtonEl.textContent = 'Read More';
     linkButtonEl.setAttribute('href', "https://www.imdb.com/find?q=" + searchInputVal + "&ref_=nv_sr_sm");
 
-    resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img, linkButtonEl);
+    resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, bodyContentEl4, img, linkButtonEl);
 
     resultContentEl.append(resultCard);
 }
@@ -111,8 +122,13 @@ function bookResults(resultObj, i) {
         '<strong>Publisher:</strong> ' + resultObj.items[i].volumeInfo.publisher;
 
     var bodyContentEl4 = document.createElement('button')
-    bodyContentEl4.innerHTML = '☆';
-    bodyContentEl4.classList.add ('favoriteBtn');
+    bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ☆';
+    bodyContentEl4.classList.add('favoriteBtn');
+
+    bodyContentEl4.addEventListener ("click", showFav)
+    function showFav(){
+        bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ★';
+    }
 
     var img = document.createElement('img');
     img.src = resultObj.items[i].volumeInfo.imageLinks.thumbnail;
@@ -123,11 +139,13 @@ function bookResults(resultObj, i) {
     console.log(linkButtonEl.textContent);
     linkButtonEl.setAttribute('href', "https://www.google.com/search?tbm=bks&hl=en&q=" + searchInputVal);
 
+    var bodyContentEl5 = document.createElement('br')
+
     resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, bodyContentEl4, img, linkButtonEl);
 
     // resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img);
 
-    resultContent2El.append(resultCard);
+    resultContent2El.append(resultCard, bodyContentEl5);
 
 }
 
@@ -162,21 +180,32 @@ function searchGoogleBooks(book) {
 
 };
 
+//Recent search history display
+var searchHistoryList = [];
+
+$("#search-button").on("click", function (event) {
+    event.preventDefault();
+
+    searchInputVal = $("#searchInput").val().trim();
+    searchGoogleBooks(searchInputVal);
+    searchOMDB(searchInputVal);
+    if (!searchHistoryList.includes(searchInputVal)) {
+        searchHistoryList.push(searchInputVal);
+        var searchedList = $(`
+            <li class="list-group-item">${searchInputVal}</li>
+            `);
+        $("#searchHistory").append(searchedList);
+    };
+
+    localStorage.setItem("searchInputVal", JSON.stringify(searchHistoryList));
+    console.log(searchHistoryList);
+});
 
 
+$(document).on("click", ".list-group-item", function () {
+    var listMovieBooks = $(this).text();
+    searchGoogleBooks(listMovieBooks);
+    searchOMDB(listMovieBooks);
+});
 
-// searchOMDB("spider-man");
-// searchOMDB('goonies');
-
-// function searchGoogleBooks(book){
-
-//     var googleBookAPI = "https://www.googleapis.com/books/v1/volumes?q=harry+potter";
-
-//     fetch(googleBookAPI)
-//         .then(function(response){ 
-//         return response.json()})
-//         .then(function(data) {
-//         console.log(data)
-//     });
-// };
-// searchGoogleBooks();
+//Add to favorite funtion
