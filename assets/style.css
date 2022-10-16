@@ -9,11 +9,27 @@ img{
     width: 75px;
 }
 
+#search-title{
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+}
+
+img{
+ display: flex;
+justify-content: left;
+}
+
+#favorite-button{
+    display: flex;
+   
+}
+
 footer{
-    position: fixed;
+    /* position: fixed;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 100%; */
     /* background-color: rgb(177, 177, 98);
     color: rgb(16, 0, 0);
     text-align: center; */
@@ -25,6 +41,7 @@ footer{
 }
 
 .search-container{
+    min-height: 100vh;
     background-color: hsl(0, 0%, 100%);
     border-radius: 5px;
     border-width: 1px;
@@ -35,7 +52,7 @@ footer{
     max-width: 1600px;
     max-height: fit-content;
     padding: 30px 40px;
-    background-color: rgb(171, 186, 186);
+    background-color: rgb(88, 156, 156);
    display: flex;
    justify-content: space-between;
    flex-grow: 7;
