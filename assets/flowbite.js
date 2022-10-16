@@ -4,6 +4,7 @@ var resultContentEl = document.querySelector('#result-content');
 var resultContent2El = document.querySelector('#result-content2');
 var searchInputVal = document.querySelector('#searchInput').value;
 
+//Save the search input value
 function SearchInputSubmit(event) {
     event.preventDefault();
 
@@ -19,6 +20,7 @@ function SearchInputSubmit(event) {
     searchOMDB(searchInputVal);
 }
 
+//Get search results
 searchFormEl.addEventListener('submit', SearchInputSubmit);
 
 function movieResults(resultObj) {
@@ -47,8 +49,13 @@ function movieResults(resultObj) {
         '<strong>Director:</strong> ' + resultObj.Director;
     
     var bodyContentEl4 = document.createElement('button')
-    bodyContentEl4.innerHTML = '☆';
+    bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ☆';
     bodyContentEl4.classList.add('favoriteBtn');
+
+    bodyContentEl4.addEventListener ("click", showFav)
+    function showFav(){
+        bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ★';
+    }
 
     var img = document.createElement('img');
     img.src = resultObj.Poster;
@@ -115,8 +122,13 @@ function bookResults(resultObj, i) {
         '<strong>Publisher:</strong> ' + resultObj.items[i].volumeInfo.publisher;
 
     var bodyContentEl4 = document.createElement('button')
-    bodyContentEl4.innerHTML = '☆';
+    bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ☆';
     bodyContentEl4.classList.add('favoriteBtn');
+
+    bodyContentEl4.addEventListener ("click", showFav)
+    function showFav(){
+        bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ★';
+    }
 
     var img = document.createElement('img');
     img.src = resultObj.items[i].volumeInfo.imageLinks.thumbnail;
@@ -168,9 +180,10 @@ function searchGoogleBooks(book) {
 
 };
 
+//Recent search history display
 var searchHistoryList = [];
 
-$("#searchBtn").on("click", function (event) {
+$("#search-button").on("click", function (event) {
     event.preventDefault();
 
     searchInputVal = $("#searchInput").val().trim();
@@ -184,7 +197,7 @@ $("#searchBtn").on("click", function (event) {
         $("#searchHistory").append(searchedList);
     };
 
-    localStorage.setItem("city", JSON.stringify(searchHistoryList));
+    localStorage.setItem("searchInputVal", JSON.stringify(searchHistoryList));
     console.log(searchHistoryList);
 });
 
@@ -195,20 +208,4 @@ $(document).on("click", ".list-group-item", function () {
     searchOMDB(listMovieBooks);
 });
 
-
-
-// searchOMDB("spider-man");
-// searchOMDB('goonies');
-
-// function searchGoogleBooks(book){
-
-//     var googleBookAPI = "https://www.googleapis.com/books/v1/volumes?q=harry+potter";
-
-//     fetch(googleBookAPI)
-//         .then(function(response){ 
-//         return response.json()})
-//         .then(function(data) {
-//         console.log(data)
-//     });
-// };
-// searchGoogleBooks();
+//Add to favorite funtion
