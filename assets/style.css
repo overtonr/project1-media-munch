@@ -4,6 +4,11 @@
 
 }
 
+/* Titles appended via javascrip making heading an h3, added style to all h3 elements */
+h3{
+    text-decoration: underline;
+}
+
 img{
     height: 100%;
     width: 75px;
