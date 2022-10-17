@@ -3,7 +3,7 @@ var resultTextEl = document.querySelector('#result-text');
 var resultContentEl = document.querySelector('#result-content');
 var resultContent2El = document.querySelector('#result-content2');
 var searchInputVal = document.querySelector('#searchInput').value;
-
+var count = 0;
 //Save the search input value
 function SearchInputSubmit(event) {
     event.preventDefault();
@@ -55,6 +55,9 @@ function movieResults(resultObj) {
     bodyContentEl4.addEventListener ("click", showFav)
     function showFav(){
         bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ★';
+        // localStorage.setItem("test", "test");
+        localStorage.setItem("movieFav", resultObj.Title);
+        console.log(JSON.stringify(resultCard));
     }
 
     var img = document.createElement('img');
@@ -128,6 +131,8 @@ function bookResults(resultObj, i) {
     bodyContentEl4.addEventListener ("click", showFav)
     function showFav(){
         bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ★';
+        localStorage.setItem("bookFav" + count, resultObj.items[i].volumeInfo.title);
+        count = count + 1;
     }
 
     var img = document.createElement('img');
