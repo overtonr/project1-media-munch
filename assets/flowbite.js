@@ -12,13 +12,13 @@ function SearchInputSubmit(event) {
     event.preventDefault();
 
     var searchInputVal = document.querySelector('#searchInput').value;
-//-Flowbite error message for empty input!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //-Flowbite error message for empty input!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     if (!searchInputVal) {
         console.error('You need a search input value!');
         return;
     }
     console.log(searchInputVal)
-//call the functios and populate with the input values
+    //call the functios and populate with the input values
     searchGoogleBooks(searchInputVal);
     searchOMDB(searchInputVal);
 }
@@ -50,13 +50,13 @@ function movieResults(resultObj) {
     var bodyContentEl3 = document.createElement('p');
     bodyContentEl3.innerHTML =
         '<strong>Director:</strong> ' + resultObj.Director;
-    
+
     var bodyContentEl4 = document.createElement('button')
     bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ☆';
     bodyContentEl4.classList.add('favoriteBtn');
-//Event listener: changes text content of button, saves item to local storage
-    bodyContentEl4.addEventListener ("click", showFav)
-    function showFav(){
+    //Event listener: changes text content of button, saves item to local storage
+    bodyContentEl4.addEventListener("click", showFav)
+    function showFav() {
         bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ★';
         // localStorage.setItem("test", "test");
         localStorage.setItem("movieFav", resultObj.title);
@@ -73,7 +73,7 @@ function movieResults(resultObj) {
     var linkButtonEl = document.createElement('a');
     linkButtonEl.textContent = 'Read More';
     linkButtonEl.setAttribute('href', "https://www.imdb.com/find?q=" + searchInputVal + "&ref_=nv_sr_sm");
-//Appends all of the elements to the page
+    //Appends all of the elements to the page
     resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, bodyContentEl4, img, linkButtonEl);
     resultContentEl.append(resultCard);
 }
@@ -89,7 +89,7 @@ function searchOMDB(movie) {
             console.log(data)
 
             // movieResults(data);
-//Error message for undefined results (rather than just appending "undefined" for all fields)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //Error message for undefined results (rather than just appending "undefined" for all fields)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             if (!data) {
                 console.log('No results found!');
                 resultContentEl.innerHTML = '<h3>No results found, search again!</h3>';
@@ -132,12 +132,27 @@ function bookResults(resultObj, i) {
     var bodyContentEl4 = document.createElement('button')
     bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ☆';
     bodyContentEl4.classList.add('favoriteBtn');
-//Event listener: changes text content of button, saves item to local storage
-    bodyContentEl4.addEventListener ("click", showFav)
-    function showFav(){
+    //Event listener: changes text content of button, saves item to local storage
+    bodyContentEl4.addEventListener("click", showFav)
+    function showFav() {
         bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ★';
-        localStorage.setItem("bookFav" + count, resultObj.items[i].volumeInfo.title);
+        var bookFav = resultObj.items[i].volumeInfo.title;
+        localStorage.setItem(bookFav + count, resultObj.items[i].volumeInfo.title);
         count = count + 1;
+        // $("#fav-content").append(bookFav);
+
+        var favList = [];
+        if (!favList.includes(bookFav)) {
+            favList.push(bookFav);
+            var displayList = $(`
+            <li class="list-group-item">${bookFav}</li>
+            `);
+            //possible source where blank input is being appended. need to add condition where will not append blank !!!!!!!!!!!!!!!!!!!!!!!!!
+            $("#fav-content").append(displayList);
+        };
+        // //saving stringified version of var searchHistoryList array (line194)
+        // // localStorage.setItem(bookFav[i], JSON.stringify(favList));
+        // // console.log(favList);
     }
 
     var img = document.createElement('img');
@@ -150,7 +165,7 @@ function bookResults(resultObj, i) {
     linkButtonEl.setAttribute('href', "https://www.google.com/search?tbm=bks&hl=en&q=" + searchInputVal);
 
     var bodyContentEl5 = document.createElement('br')
-//Appends all of the elements to the page
+    //Appends all of the elements to the page
     resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, bodyContentEl4, img, linkButtonEl);
 
     // resultBody.append(titleEl, bodyContentEl1, bodyContentEl2, bodyContentEl3, img);
@@ -170,7 +185,7 @@ function searchGoogleBooks(book) {
             console.log(data)
 
             // bookResults(data);
-//Error message for undefined results (rather than just appending "undefined" for all fields)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //Error message for undefined results (rather than just appending "undefined" for all fields)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             if (!data.items.length) {
                 console.log('No results found!');
                 resultContent2El.innerHTML = '<h3>No results found, search again!</h3>';
@@ -200,7 +215,7 @@ $("#search-button").on("click", function (event) {
     searchInputVal = $("#searchInput").val().trim();
     searchGoogleBooks(searchInputVal);
     searchOMDB(searchInputVal);
-//prevents duplicate search values from being appended multiple times
+    //prevents duplicate search values from being appended multiple times
     if (!searchHistoryList.includes(searchInputVal)) {
         searchHistoryList.push(searchInputVal);
         var searchedList = $(`
@@ -209,7 +224,7 @@ $("#search-button").on("click", function (event) {
         //possible source where blank input is being appended. need to add condition where will not append blank !!!!!!!!!!!!!!!!!!!!!!!!!
         $("#searchHistory").append(searchedList);
     };
-//saving stringified version of var searchHistoryList array (line194)
+    //saving stringified version of var searchHistoryList array (line194)
     localStorage.setItem("searchInputVal", JSON.stringify(searchHistoryList));
     console.log(searchHistoryList);
 });
@@ -224,8 +239,8 @@ $(document).on("click", ".list-group-item", function () {
 
 
 //Add to favorite funtion: in progress
-function addToFav(){
-    if(starred === true){
-        getItem("movieFav");
-    }
-}
+// function addToFav() {
+//     if (starred === true) {
+//         getItem("movieFav");
+//     }
+// }
