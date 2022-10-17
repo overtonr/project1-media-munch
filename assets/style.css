@@ -59,6 +59,9 @@ footer{
    flex-wrap: wrap;
     
 }
+#wrap-card{
+    inline-size: 100px;
+}
 
 
 @media screen and (max-width: 486px) {
