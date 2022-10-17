@@ -220,6 +220,8 @@ $(document).on("click", ".list-group-item", function () {
     searchOMDB(listMovieBooks);
 });
 
+
+
 //Add to favorite funtion: in progress
 function addToFav(){
     if(starred === true){
