@@ -59,7 +59,7 @@ function movieResults(resultObj) {
     function showFav(){
         bodyContentEl4.innerHTML = '<strong>Add to favorite</strong> ★';
         // localStorage.setItem("test", "test");
-        localStorage.setItem("movieFav", resultObj.Title);
+        localStorage.setItem("movieFav", resultObj.title);
         console.log(JSON.stringify(resultCard));
         var starred = true;
         console.log(starred);
@@ -192,6 +192,7 @@ function searchGoogleBooks(book) {
 //Recent search history display
 //Find out a way to populate the "empty" array with a storage value so it is not cleared when the page is refreshed!!!!!!!!!!!!!!!!!!!!!!
 var searchHistoryList = [];
+document.getElementById("searchHistory").style.marginLeft = "40px";
 
 $("#search-button").on("click", function (event) {
     event.preventDefault();
